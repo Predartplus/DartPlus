@@ -7,7 +7,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Controllers\LoginController.cs" />
     <Compile Remove="Controllers\LoginsController.cs" />
+    <Compile Remove="DBContext\Login.cs" />
+    <Compile Remove="Models\Request\LoginRequest.cs" />
   </ItemGroup>
 
   <ItemGroup>
@@ -23,8 +26,8 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="Models\Request\" />
     <Folder Include="Models\Response\" />
-    <Folder Include="Utility\" />
   </ItemGroup>
 
 </Project>
