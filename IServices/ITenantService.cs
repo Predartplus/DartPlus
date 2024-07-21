@@ -8,7 +8,7 @@ namespace DartPlusAPI.IServices
         Task<ActionResult<object>> GetTenants();
         Task<ActionResult<object>> GetTenant(Guid id);
         Task<ActionResult<object>> AddTenant(Tenants Tenant);
-        Task<ActionResult<object>> UpdateTenant(Tenants Tenant);
+        Task<ActionResult<object>> UpdateTenantStatus(Guid idUpdatedBy,string UpdatedBy,bool IsActive);
         Task<ActionResult<object>> DeleteTenant(Guid id);
     }
 }

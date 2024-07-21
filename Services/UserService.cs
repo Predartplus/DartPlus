@@ -1,5 +1,6 @@
 ﻿using DartPlusAPI.DBContext;
 using DartPlusAPI.IServices;
+using DartPlusAPI.Utility;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.VisualStudio.Web.CodeGenerators.Mvc.Templates.BlazorIdentity.Pages;
@@ -7,41 +8,42 @@ using NuGet.Protocol.Plugins;
 
 namespace DartPlusAPI.Services
 {
-    public class TenantService: ITenantService
+    public class UserService: IUserService
     {
         private readonly PlusDbContext _context;
-        public TenantService(PlusDbContext context)
+        public UserService(PlusDbContext context)
         {
             _context = context;
         }
-        public async Task<ActionResult<object>> GetTenants()
+        public async Task<ActionResult<object>> GetUsers()
         {
-            return await _context.Tenants.ToListAsync();
+            return await _context.Users.ToListAsync();
         }
-        public async Task<ActionResult<object>> GetTenant(Guid id)
+        public async Task<ActionResult<object>> GetUser(Guid id)
         {
             try
             {
-                return await _context.Tenants.FirstOrDefaultAsync(u => u.TenantID == id);
+                return await _context.Users.FirstOrDefaultAsync(u => u.UserID == id);
             }
             catch (DbUpdateConcurrencyException)
             {
                 throw;
             }
         }
-        public async Task<ActionResult<object>> AddTenant(Tenants Tenant)
+        public async Task<ActionResult<object>> AddUser(Users User)
         {
-            _context.Tenants.Add(Tenant);
+            User.Password = CommonUtility.HashPassword(User.Password);
+            _context.Users.Add(User);
             return await _context.SaveChangesAsync();
         }
-        public async Task<ActionResult<object>> UpdateTenantStatus(Guid id, string UpdatedBy,bool IsActive)
+        public async Task<ActionResult<object>> UpdateUserStatus(Guid id, string UpdatedBy,bool IsActive)
         {
             try
             {
-                Tenants Tenant= await _context.Tenants.FirstOrDefaultAsync(u => u.TenantID == id);
-                Tenant.IsActive= IsActive;
-                Tenant.UpdatedBy = UpdatedBy;
-                Tenant.UpdatedOn= DateTime.Now;
+                Users User= await _context.Users.FirstOrDefaultAsync(u => u.UserID == id);
+                User.IsActive= IsActive;
+                User.UpdatedBy = UpdatedBy;
+                User.UpdatedOn= DateTime.Now;
                 return await _context.SaveChangesAsync();
             }
             catch (DbUpdateConcurrencyException)
@@ -49,12 +51,12 @@ namespace DartPlusAPI.Services
                     throw;
             }
         }
-        public async Task<ActionResult<object>> DeleteTenant(Guid id)
+        public async Task<ActionResult<object>> DeleteUser(Guid id)
         {
             try
             {
-                Tenants RemoveTenant = await _context.Tenants.FindAsync(id);
-                _context.Tenants.Remove(RemoveTenant);
+                Users RemoveUser = await _context.Users.FindAsync(id);
+                _context.Users.Remove(RemoveUser);
                 return await _context.SaveChangesAsync();
             }
             catch (DbUpdateConcurrencyException)
