@@ -8,13 +8,3 @@
 /Properties
 /bin/Release/net8.0
 /.vs/CarePoint/v17/.wsuo
-*.json
-/.vs/ProjectEvaluation/dartplusapi.metadata.v8.bin
-/.vs/ProjectEvaluation/dartplusapi.projects.v8.bin
-/.vs/ProjectEvaluation/dartplusapi.strings.v8.bin
-/DartPlusAPI.csproj.user
-/.gitignore
-/bin/Release/net8.0/DartPlusAPI.deps.json
-/bin/Release/net8.0/DartPlusAPI.dll
-/bin/Release/net8.0/DartPlusAPI.exe
-/bin/Release/net8.0/DartPlusAPI.pdb
