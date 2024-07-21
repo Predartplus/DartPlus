@@ -1,9 +1,9 @@
 ﻿using DartPlusAPI.DBContext;
 using DartPlusAPI.IServices;
+using DartPlusAPI.Models.Request;
 using DartPlusAPI.Services;
 using Microsoft.AspNetCore.Mvc;
-
-// For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+using System.Data;
 
 namespace DartPlusAPI.Controllers
 {
@@ -42,9 +42,9 @@ namespace DartPlusAPI.Controllers
 
         // PUT api/<TenantController>/5
         [HttpPut]
-        public async Task<ActionResult<object>> Put([FromBody] Tenants Tenant)
+        public async Task<ActionResult<object>> Put([FromBody] UpdateStatusReq Tenant)
         {
-            return await _iTenantService.UpdateTenant(Tenant);
+            return await _iTenantService.UpdateTenantStatus(Tenant.GuidID, Tenant.UpdatedBy, Tenant.IsActive);
         }
 
         // DELETE api/<TenantController>/5

@@ -7,41 +7,42 @@ using NuGet.Protocol.Plugins;
 
 namespace DartPlusAPI.Services
 {
-    public class TenantService: ITenantService
+    public class RoleService: IRoleService
     {
         private readonly PlusDbContext _context;
-        public TenantService(PlusDbContext context)
+        public RoleService(PlusDbContext context)
         {
             _context = context;
         }
-        public async Task<ActionResult<object>> GetTenants()
+        public async Task<ActionResult<object>> GetRoles()
         {
-            return await _context.Tenants.ToListAsync();
+            return await _context.Roles.ToListAsync();
         }
-        public async Task<ActionResult<object>> GetTenant(Guid id)
+        public async Task<ActionResult<object>> GetRole(int id)
         {
             try
             {
-                return await _context.Tenants.FirstOrDefaultAsync(u => u.TenantID == id);
+                return await _context.Roles.FirstOrDefaultAsync(u => u.RoleID == id);
             }
             catch (DbUpdateConcurrencyException)
             {
                 throw;
             }
         }
-        public async Task<ActionResult<object>> AddTenant(Tenants Tenant)
+        public async Task<ActionResult<object>> AddRole(Roles Role)
         {
-            _context.Tenants.Add(Tenant);
+            _context.Roles.Add(Role);
             return await _context.SaveChangesAsync();
         }
-        public async Task<ActionResult<object>> UpdateTenantStatus(Guid id, string UpdatedBy,bool IsActive)
+        public async Task<ActionResult<object>> UpdateRoleStatus(int id,string UpdatedBy, bool IsActive)
         {
             try
             {
-                Tenants Tenant= await _context.Tenants.FirstOrDefaultAsync(u => u.TenantID == id);
-                Tenant.IsActive= IsActive;
-                Tenant.UpdatedBy = UpdatedBy;
-                Tenant.UpdatedOn= DateTime.Now;
+                Roles Role= await _context.Roles.FirstOrDefaultAsync(u => u.RoleID == id);
+                Role.IsActive = IsActive;
+                Role.UpdatedBy = UpdatedBy;
+                Role.UpdatedOn = DateTime.Now;
+                Role.IsActive= IsActive;
                 return await _context.SaveChangesAsync();
             }
             catch (DbUpdateConcurrencyException)
@@ -49,12 +50,12 @@ namespace DartPlusAPI.Services
                     throw;
             }
         }
-        public async Task<ActionResult<object>> DeleteTenant(Guid id)
+        public async Task<ActionResult<object>> DeleteRole(int id)
         {
             try
             {
-                Tenants RemoveTenant = await _context.Tenants.FindAsync(id);
-                _context.Tenants.Remove(RemoveTenant);
+                Roles RemoveRole = await _context.Roles.FindAsync(id);
+                _context.Roles.Remove(RemoveRole);
                 return await _context.SaveChangesAsync();
             }
             catch (DbUpdateConcurrencyException)

@@ -8,10 +8,10 @@ namespace DartPlusAPI.DBContext
         public int RoleID { get; set; }
         public required string RoleName { get; set; }
         public required string CreatedBy { get; set; }
-        public DateTime CreatedOn { get; set; }
+        public DateTime CreatedOn { get; set; }= DateTime.Now;
         public string? UpdatedBy { get; set; }
-        public DateTime UpdatedOn { get; set; }
-        public bool IsActive { get; set; }
+        public DateTime UpdatedOn { get; set; }= DateTime.Now;
+        public bool IsActive { get; set; }=true;
 
     }
 }
