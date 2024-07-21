@@ -1,4 +1,6 @@
-using DartPlusAPI.Models;
+using DartPlusAPI.DBContext;
+using DartPlusAPI.Services;
+using DartPlusAPI.IServices;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -11,6 +13,8 @@ opt.UseSqlServer(builder.Configuration.GetConnectionString("PreDartPlusAzureCon"
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+
+builder.Services.AddScoped<ITenantService,TenantService>();
 
 var app = builder.Build();
 

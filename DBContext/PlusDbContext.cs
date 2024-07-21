@@ -1,9 +1,8 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using DartPlusAPI.Models;
 
-namespace DartPlusAPI.Models
+namespace DartPlusAPI.DBContext
 {
-    public class PlusDbContext: DbContext
+    public class PlusDbContext : DbContext
     {
         public PlusDbContext(DbContextOptions<PlusDbContext> options) : base(options)
         {
@@ -12,7 +11,11 @@ namespace DartPlusAPI.Models
         {
             //optionsBuilder.UseSqlServer("OurConnectionString");
         }
-        public DbSet<Test> Test { get; set; } = default!;
-        public DbSet<Login> Login { get; set; } = default!;
+
+        public DbSet<Tenants> Tenants { get; set; } = default!;
+        public DbSet<Users> Users { get; set; } = default!;
+        public DbSet<Roles> Roles { get; set; } = default!;
+        public DbSet<UserRoles> UserRoles { get; set; } = default!;
+
     }
 }
