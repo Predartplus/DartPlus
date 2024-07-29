@@ -15,3 +15,4 @@
 /.vs/ProjectEvaluation/dartplusapi.strings.v8.bin
 /.vs/VSWorkspaceState.json
 /DartPlusAPI.csproj.user
+/.gitignore
