@@ -16,6 +16,7 @@ namespace DartPlusAPI.DBContext
         public DbSet<Users> Users { get; set; } = default!;
         public DbSet<Roles> Roles { get; set; } = default!;
         public DbSet<UserRoles> UserRoles { get; set; } = default!;
+        public DbSet<Patients> Patients { get; set; } = default!;
 
     }
 }

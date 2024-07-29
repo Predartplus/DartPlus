@@ -18,6 +18,7 @@ builder.Services.AddScoped<ITenantService,TenantService>();
 builder.Services.AddScoped<IRoleService, RoleService>();
 builder.Services.AddScoped<IUserService, UserService>();
 builder.Services.AddScoped<ILoginService, LoginService>();
+builder.Services.AddScoped<IPatientService, PatientService>();
 
 var app = builder.Build();
 
