@@ -23,6 +23,7 @@ builder.Services.AddScoped<IAddressService, AddressService>();
 builder.Services.AddScoped<IEmergencyContactService, EmergencyContactService>();
 builder.Services.AddScoped<IAppLOVService, AppLOVService>();
 builder.Services.AddScoped<IAppointmentService, AppointmentService>();
+builder.Services.AddCors();
 
 
 var app = builder.Build();
@@ -33,6 +34,8 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+
+app.UseCors();
 
 app.UseHttpsRedirection();
 
